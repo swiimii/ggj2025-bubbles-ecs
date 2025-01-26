@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6925153382943215764}
   - component: {fileID: 3433809333588235949}
   - component: {fileID: 1393571140273876905}
+  - component: {fileID: 5540998440673303088}
   m_Layer: 0
   m_Name: Bubble Entity
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 26b3ccbbb41dc7f4aa711b177cb1d581, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,3 +273,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5540998440673303088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210559578318424845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8eea78260725043b6bce755f2b5239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: {r: 0, g: 0, b: 0, a: 0}

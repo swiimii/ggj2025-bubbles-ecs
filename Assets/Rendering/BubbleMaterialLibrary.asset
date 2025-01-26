@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1198f2ddd7472b64d9c629218f72001f, type: 3}
+  m_Name: BubbleMaterialLibrary
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 26b3ccbbb41dc7f4aa711b177cb1d581, type: 2}
+  - {fileID: 2100000, guid: b770d9dde79bc0241891e6c262c56c73, type: 2}
+  - {fileID: 2100000, guid: 8542bbceef86dac44a8d11506e35fa37, type: 2}
+  - {fileID: 2100000, guid: 0a19515aed1e63846adff1db41f9ac49, type: 2}
+  - {fileID: 2100000, guid: 087369556668f7c40a43f702a80ae50c, type: 2}
+  - {fileID: 2100000, guid: 354b05f800fc22045a94881f63fa7ffd, type: 2}
