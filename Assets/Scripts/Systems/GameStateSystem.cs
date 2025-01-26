@@ -3,16 +3,9 @@ using Unity.Entities;
 using Unity.Transforms;
 
 [UpdateBefore(typeof(BubbleCleanup))]
-partial struct GameStateSystem : ISystem
+partial class GameStateSystem : SystemBase
 {
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
-    {
-        
-    }
-
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
+    protected override void OnUpdate()
     {
         foreach ( var (bubble, transform) in SystemAPI.Query<RefRW<Bubble_c>, RefRO<LocalTransform>>())
         {
@@ -24,11 +17,4 @@ partial struct GameStateSystem : ISystem
             }
         }
     }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
-        
-    }
-
 }

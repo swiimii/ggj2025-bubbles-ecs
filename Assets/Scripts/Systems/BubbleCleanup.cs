@@ -4,16 +4,10 @@ using Unity.Transforms;
 using Unity.Collections;
 
 [UpdateAfter(typeof(BubbleCollisionSystem))]
-partial struct BubbleCleanup : ISystem
+partial class BubbleCleanup : SystemBase
 {
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
-    {
-        
-    }
-
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
+    
+    protected override void OnUpdate()
     {
         EntityCommandBuffer buffer = new EntityCommandBuffer(Allocator.Temp);
 
@@ -28,14 +22,8 @@ partial struct BubbleCleanup : ISystem
 
         if( !buffer.IsEmpty)
         {
-            buffer.Playback(World.DefaultGameObjectInjectionWorld.EntityManager);
+            buffer.Playback(EntityManager);
         }
         buffer.Dispose();
-    }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
-        
     }
 }
