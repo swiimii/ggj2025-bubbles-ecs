@@ -8,8 +8,10 @@ public class Scoreboard : MonoBehaviour
 
     private void Start()
     {
-        UpdateScoreboard(0);
-        UpdateHighScore();
+        if( sessionHighScore )
+        {
+            UpdateHighScore();
+        }
     }
     public void UpdateScoreboard( int newScore )
     {

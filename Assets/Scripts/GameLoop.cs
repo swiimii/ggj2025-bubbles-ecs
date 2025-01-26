@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Unity.Scenes;
+using Unity.Entities;
 
 public class GameLoop : MonoBehaviour
 {
@@ -13,6 +15,11 @@ public class GameLoop : MonoBehaviour
 
     public UnityEvent<int /*newScore*/> onScoreIncreaseEvent;
     public UnityEvent onGameLossEvent;
+
+    public SubScene subSceneToLoad;
+
+    private Entity subScene;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -31,9 +38,13 @@ public class GameLoop : MonoBehaviour
 
     public static void LoseGame()
     {
-        Singleton.isGameOver = true;
-        Singleton.onGameLossEvent.Invoke();
-        UpdateSessionHighScore();
+        if( !Singleton.isGameOver )
+        {
+            Singleton.isGameOver = true;
+            Singleton.onGameLossEvent.Invoke();
+            UpdateSessionHighScore();
+            Singleton.StartCoroutine(Singleton.GameRestartCoroutine());
+        }
     }
 
     public static void UpdateSessionHighScore()
@@ -44,7 +55,21 @@ public class GameLoop : MonoBehaviour
     public IEnumerator GameRestartCoroutine()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        entityManager.DestroyEntity(entityManager.UniversalQuery);
+
+        World.DefaultGameObjectInjectionWorld.Dispose();
+        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        DefaultWorldInitialization.Initialize("Default World", false);
+
+        var loadParameters = new SceneSystem.LoadParameters
+        {
+            Flags = SceneLoadFlags.NewInstance,
+
+        };
+
+        SceneSystem.LoadSceneAsync(World.DefaultGameObjectInjectionWorld.Unmanaged, subSceneToLoad.SceneGUID, loadParameters);
     }
 
 }

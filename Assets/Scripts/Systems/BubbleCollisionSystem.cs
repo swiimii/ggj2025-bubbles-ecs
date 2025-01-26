@@ -10,7 +10,7 @@ partial struct BubbleCollisionSystem : ISystem
 	[BurstCompile]
 	public void OnCreate(ref SystemState state)
 	{
-		// state.RequireForUpdate<SimulationSingleton>();
+		state.RequireForUpdate<SimulationSingleton>();
 	}
 
     [BurstCompile]
