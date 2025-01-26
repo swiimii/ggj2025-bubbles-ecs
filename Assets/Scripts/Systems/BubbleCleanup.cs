@@ -1,5 +1,6 @@
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Transforms;
 using Unity.Collections;
 
 [UpdateAfter(typeof(BubbleCollisionSystem))]
@@ -16,15 +17,19 @@ partial struct BubbleCleanup : ISystem
     {
         EntityCommandBuffer buffer = new EntityCommandBuffer(Allocator.Temp);
 
-        foreach (var bubble in SystemAPI.Query<RefRO<Bubble_c>>().WithEntityAccess())
+        foreach (var (bubble, transform, entity) in SystemAPI.Query<RefRO<Bubble_c>, RefRO<LocalTransform>>().WithEntityAccess())
         {
-            if ( bubble.Item1.ValueRO.isDestroyed )
+            if ( bubble.ValueRO.isDestroyed || bubble.ValueRO.rank > GameDefines.BUBBLE_MAX_RANK )
             {
-                buffer.DestroyEntity(bubble.Item2);
+                buffer.DestroyEntity(entity);
+                AudioManager.PlayAudioAtLocation(transform.ValueRO.Position);
             }
         }
 
-        buffer.Playback(World.DefaultGameObjectInjectionWorld.EntityManager);
+        if( !buffer.IsEmpty)
+        {
+            buffer.Playback(World.DefaultGameObjectInjectionWorld.EntityManager);
+        }
         buffer.Dispose();
     }
 

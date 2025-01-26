@@ -7,6 +7,7 @@ using Unity.Mathematics;
 public class BubbleMaterialLibrary : ScriptableObject
 {
     public List<Material> materials;
+    public AudioClip popSound;
     public static BubbleMaterialLibrary Singleton;
 
     private void OnEnable()
@@ -25,5 +26,10 @@ public class BubbleMaterialLibrary : ScriptableObject
 
         Debug.LogError("Invalid rank provided");
         return Singleton.materials[0].color;
+    }
+
+    public static AudioClip GetPopAudioClip()
+    {
+        return Singleton.popSound;
     }
 }
